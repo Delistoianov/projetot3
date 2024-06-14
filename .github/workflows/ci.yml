@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: npm new
+        run: npm install
 
   run-tests:
     needs: checkout-code
@@ -56,3 +56,25 @@ jobs:
         with:
           name: test-results
           path: incorrect-path/test-results
+
+
+# Este arquivo YAML é uma configuração para o GitHub Actions, especificamente projetado para um fluxo de trabalho chamado "Sails Test Workflow". 
+#Ele é configurado para ser acionado sempre que houver um 'push' ou um 'pull request' para a branch 'develop'.
+
+# O fluxo de trabalho está dividido em quatro jobs principais:
+
+# 1. checkout-code: Este job é responsável por obter o código-fonte do repositório utilizando a ação 'actions/checkout@v2' e é executado em um ambiente virtual com 
+#Ubuntu mais recente disponível.
+
+# 2. install-dependencies: Este job depende da conclusão do job 'checkout-code' e é também executado no Ubuntu. Ele realiza duas etapas principais: primeiro, realiza o 
+#checkout do código novamente e segundo, tenta executar um comando 'npm new', o qual parece ser um erro, pois o comando padrão para instalar dependências seria 'npm install'.
+
+# 3. run-tests: Dependente também do 'checkout-code', este job segue um procedimento similar ao anterior para realizar o checkout e instalar dependências. 
+#Após isso, executa os testes unitários do projeto usando 'npm test'.
+
+# 4. upload-test-results: O último job depende da conclusão do job 'run-tests' e executa os mesmos passos de checkout e instalação de dependências, além de rodar os testes
+# novamente. Finalmente, tenta fazer o upload dos resultados dos testes para serem armazenados como um artefato no GitHub. No entanto, há um erro na especificação do 
+#caminho dos resultados dos testes ('incorrect-path/test-results'), o que provavelmente causará falha na execução deste passo.
+
+# Em resumo, este arquivo automatiza o processo de obtenção do código, instalação de dependências, execução de testes e coleta de resultados de testes para um projeto, 
+#embora contenha alguns erros que precisam ser corrigidos para seu funcionamento correto.
